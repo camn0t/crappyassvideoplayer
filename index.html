@@ -37,21 +37,35 @@
     function openFullscreen() {
       const video = document.getElementById('my-video');
       if (video.requestFullscreen) {
-        video.requestFullscreen();
+        video.requestFullscreen().catch(() => {
+          alert("Failed to enter fullscreen. Please try manually.");
+        });
       } else if (video.mozRequestFullScreen) { // Firefox
-        video.mozRequestFullScreen();
+        video.mozRequestFullScreen().catch(() => {
+          alert("Failed to enter fullscreen. Please try manually.");
+        });
       } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        video.webkitRequestFullscreen();
+        video.webkitRequestFullscreen().catch(() => {
+          alert("Failed to enter fullscreen. Please try manually.");
+        });
       } else if (video.msRequestFullscreen) { // IE/Edge
-        video.msRequestFullscreen();
+        video.msRequestFullscreen().catch(() => {
+          alert("Failed to enter fullscreen. Please try manually.");
+        });
+      } else {
+        alert("Fullscreen API is not supported by this browser.");
       }
     }
 
     // Function to handle exiting fullscreen
     function handleFullscreenChange() {
       if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        // Close the tab when exiting fullscreen
-        window.close();
+        try {
+          // Close the tab when exiting fullscreen
+          window.close();
+        } catch (e) {
+          alert("Failed to close the tab automatically. Please close it manually.");
+        }
       }
     }
 
