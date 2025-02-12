@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crappy Ass video Player</title>
+  <title>Video Page</title>
   <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
 </head>
 <body>
@@ -32,6 +32,37 @@
 
     // Set the video source
     document.getElementById('video-source').src = getVideoUrl();
+
+    // Function to enter fullscreen
+    function openFullscreen() {
+      const video = document.getElementById('my-video');
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) { // Firefox
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // IE/Edge
+        video.msRequestFullscreen();
+      }
+    }
+
+    // Function to handle exiting fullscreen
+    function handleFullscreenChange() {
+      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        // Close the tab when exiting fullscreen
+        window.close();
+      }
+    }
+
+    // Event listeners for fullscreen changes
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+    // Automatically enter fullscreen when the page loads
+    window.onload = openFullscreen;
   </script>
 </body>
 </html>
