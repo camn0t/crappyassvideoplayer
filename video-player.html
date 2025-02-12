@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crappy Ass video Player</title>
+  <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
+</head>
+<body>
+  <video
+    id="my-video"
+    class="video-js vjs-default-skin"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    data-setup="{}"
+  >
+    <source id="video-source" type="video/mp4" />
+    <p class="vjs-no-js">
+      To view this video, please enable JavaScript or use a browser that supports HTML5 video.
+    </p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script>
+  <script>
+    // Function to get the video URL from the query parameters
+    function getVideoUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('videoUrl');
+    }
+
+    // Set the video source
+    document.getElementById('video-source').src = getVideoUrl();
+  </script>
+</body>
+</html>
