@@ -21,11 +21,16 @@
       width: 100%;
       height: 100%;
     }
+
+    .video-js {
+      width: 100% !important;
+      height: 100% !important;
+    }
   </style>
 </head>
 <body>
   <div id="video-container">
-    <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="100%">
+    <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto">
       <p class="vjs-no-js">
         To view this video please enable JavaScript, and consider upgrading to a web browser that
         <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -52,8 +57,8 @@
 
     // Get URL parameters
     const urlParams = getUrlParams();
-    const videoUrl = urlParams.videourl;
-    const subtitleUrl = urlParams.subtitleurl;
+    const videoUrl = urlParams.videourl ? atob(urlParams.videourl) : '';
+    const subtitleUrl = urlParams.subtitleurl ? atob(urlParams.subtitleurl) : '';
 
     // Set video source
     if (videoUrl) {
